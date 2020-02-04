@@ -2,12 +2,14 @@ package org.byters.gallery;
 
 import android.app.Application;
 
+import org.byters.api.disccache.IPreferenceStorage;
 import org.byters.api.memorycache.ICacheList;
 import org.byters.api.repository.IRepositoryList;
 import org.byters.api.view.INavigator;
 import org.byters.api.view.presenter.IPresenterList;
 import org.byters.api.view.presenter.IPresenterListAdapter;
 import org.byters.api.view.ui.IHelperPopup;
+import org.byters.gallery.disccache.PreferenceStorage;
 import org.byters.gallery.memorycache.CacheList;
 import org.byters.gallery.repository.RepositoryList;
 import org.byters.gallery.view.Navigator;
@@ -24,6 +26,7 @@ class Initializator {
     private ICacheList cacheList;
     private IRepositoryList repositoryList;
     private IHelperPopup helperPopup;
+    private IPreferenceStorage preferenceStorage;
 
     Initializator(Application application) {
         this.application = application;
@@ -61,5 +64,10 @@ class Initializator {
     public IHelperPopup getHelperPopup() {
         if (helperPopup == null) helperPopup = new HelperPopup();
         return helperPopup;
+    }
+
+    public IPreferenceStorage getPreferenceStorage() {
+        if (preferenceStorage == null) preferenceStorage = new PreferenceStorage();
+        return preferenceStorage;
     }
 }

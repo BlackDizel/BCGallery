@@ -2,6 +2,7 @@ package org.byters.gallery;
 
 import android.app.Application;
 
+import org.byters.gallery.memorycache.CacheList;
 import org.byters.gallery.repository.RepositoryList;
 import org.byters.gallery.view.Navigator;
 import org.byters.gallery.view.presenter.PresenterAdapterList;
@@ -44,6 +45,7 @@ class Injector implements org.byters.api.IInjector {
         presenterFragmentList.cacheList = links.getCacheList();
         presenterFragmentList.application = links.getApplication();
         presenterFragmentList.helperPopup = links.getHelperPopup();
+        presenterFragmentList.preferenceStorage = links.getPreferenceStorage();
     }
 
     @Override
@@ -55,6 +57,12 @@ class Injector implements org.byters.api.IInjector {
     @Override
     public void inject(Navigator navigator) {
         navigator.helperPopup = links.getHelperPopup();
+        navigator.preferenceStorage = links.getPreferenceStorage();
+    }
+
+    @Override
+    public void inject(CacheList cacheList) {
+        cacheList.preferenceStorage = links.getPreferenceStorage();
     }
 
 }

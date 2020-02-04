@@ -4,6 +4,8 @@ import android.app.FragmentManager;
 import android.content.Context;
 
 import org.byters.api.view.INavigator;
+import org.byters.api.view.ui.IHelperPopup;
+import org.byters.gallery.GalleryApplication;
 import org.byters.gallery.view.ui.fragment.FragmentError;
 import org.byters.gallery.view.ui.fragment.FragmentItemImage;
 import org.byters.gallery.view.ui.fragment.FragmentList;
@@ -11,6 +13,12 @@ import org.byters.gallery.view.ui.fragment.FragmentList;
 import java.lang.ref.WeakReference;
 
 public class Navigator implements INavigator {
+
+    public IHelperPopup helperPopup;
+
+    public Navigator() {
+        GalleryApplication.getInjector().inject(this);
+    }
 
     private WeakReference<Context> refContext;
     private WeakReference<FragmentManager> refManager;
@@ -21,6 +29,7 @@ public class Navigator implements INavigator {
         this.refContext = new WeakReference<>(context);
         this.refManager = new WeakReference<>(manager);
         this.layoutId = layoutId;
+        helperPopup.set(context);
     }
 
     @Override

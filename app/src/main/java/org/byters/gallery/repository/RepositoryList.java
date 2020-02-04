@@ -5,9 +5,6 @@ import android.app.Application;
 import org.byters.api.memorycache.ICacheList;
 import org.byters.gallery.GalleryApplication;
 
-import java.io.File;
-import java.util.ArrayList;
-
 public class RepositoryList implements org.byters.api.repository.IRepositoryList {
 
     public ICacheList cacheList;

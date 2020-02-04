@@ -6,7 +6,9 @@ import android.os.Environment;
 import org.byters.api.memorycache.ICacheList;
 import org.byters.api.memorycache.listener.ICacheListListener;
 import org.byters.api.view.presenter.listener.IPresenterListListener;
+import org.byters.api.view.ui.IHelperPopup;
 import org.byters.gallery.GalleryApplication;
+import org.byters.gallery.R;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -15,6 +17,8 @@ public class PresenterFragmentList implements org.byters.api.view.presenter.IPre
 
     public ICacheList cacheList;
     public Application application;
+    public IHelperPopup helperPopup;
+
     private WeakReference<IPresenterListListener> refListener;
     private CacheListListener listenerCache;
 
@@ -36,12 +40,19 @@ public class PresenterFragmentList implements org.byters.api.view.presenter.IPre
     @Override
     public void onClickParent() {
         File file = cacheList.getFile();
-        if (file == null) return;
 
+        if (!isParentFolderContentExist(file)) {
+            helperPopup.showMessage(R.string.parent_files_empty);
+            return;
+        }
+
+        cacheList.setFile(file.getParentFile());
+    }
+
+    private boolean isParentFolderContentExist(File file) {
+        if (file == null) return false;
         File parent = file.getParentFile();
-        if (parent == null) return;
-
-        cacheList.setFile(parent);
+        return parent != null && parent.listFiles() != null && parent.listFiles().length > 0;
     }
 
     @Override
@@ -54,6 +65,8 @@ public class PresenterFragmentList implements org.byters.api.view.presenter.IPre
         public void onUpdate() {
             if (refListener == null || refListener.get() == null) return;
             refListener.get().setContentExist(cacheList.getItemsNum() > 0);
+
+            refListener.get().setButtonUpVisible(isParentFolderContentExist(cacheList.getFile()));
         }
     }
 }

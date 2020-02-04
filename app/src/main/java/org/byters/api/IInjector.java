@@ -1,6 +1,7 @@
 package org.byters.api;
 
 import org.byters.gallery.repository.RepositoryList;
+import org.byters.gallery.view.Navigator;
 import org.byters.gallery.view.presenter.PresenterAdapterList;
 import org.byters.gallery.view.presenter.PresenterFragmentList;
 import org.byters.gallery.view.ui.activity.MainActivity;
@@ -19,4 +20,6 @@ public interface IInjector {
     void inject(PresenterFragmentList presenterFragmentList);
 
     void inject(RepositoryList repositoryList);
+
+    void inject(Navigator navigator);
 }

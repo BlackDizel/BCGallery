@@ -19,7 +19,6 @@ public class PresenterAdapterList implements org.byters.api.view.presenter.IPres
     private final ICacheListListener listenerCache;
     public INavigator navigator;
     public ICacheList cacheList;
-    public IRepositoryList repositoryList;
 
     private WeakReference<IPresenterListAdapterListener> refListener;
 

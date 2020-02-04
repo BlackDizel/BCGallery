@@ -21,6 +21,7 @@ public class FragmentList extends Fragment implements View.OnClickListener {
     private AdapterList adapter;
     private ListenerPresenter listenerPresenter;
     private TextView tvMessage;
+    private View ivParent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,8 @@ public class FragmentList extends Fragment implements View.OnClickListener {
         lvItems = view.findViewById(R.id.lvItems);
         lvItems.setAdapter(adapter = new AdapterList());
         tvMessage = view.findViewById(R.id.tvMessage);
-        view.findViewById(R.id.ivParent).setOnClickListener(this);
+        ivParent = view.findViewById(R.id.ivParent);
+        ivParent.setOnClickListener(this);
     }
 
     @Override
@@ -56,6 +58,11 @@ public class FragmentList extends Fragment implements View.OnClickListener {
             lvItems.setVisibility(isExist ? View.VISIBLE : View.GONE);
             tvMessage.setVisibility(isExist ? View.GONE : View.VISIBLE);
             tvMessage.setText(isExist ? R.string.empty : R.string.no_content);
+        }
+
+        @Override
+        public void setButtonUpVisible(boolean parentFolderContentExist) {
+            ivParent.setVisibility(parentFolderContentExist ? View.VISIBLE : View.GONE);
         }
     }
 }

@@ -4,11 +4,11 @@ import org.byters.api.memorycache.ICacheList;
 import org.byters.api.memorycache.listener.ICacheListListener;
 
 import java.io.File;
-import java.lang.ref.WeakReference;
+import java.util.WeakHashMap;
 
 public class CacheList implements ICacheList {
 
-    private WeakReference<ICacheListListener> refListener;
+    private WeakHashMap<String, ICacheListListener> refListener;
     private File file;
 
     @Override
@@ -18,7 +18,8 @@ public class CacheList implements ICacheList {
 
     @Override
     public void addListener(ICacheListListener listener) {
-        this.refListener = new WeakReference<>(listener);
+        if (refListener == null) refListener = new WeakHashMap<>();
+        refListener.put(listener.getClass().getName(), listener);
     }
 
     @Override
@@ -40,8 +41,10 @@ public class CacheList implements ICacheList {
     }
 
     private void notifyListeners() {
-        if (refListener == null || refListener.get() == null) return;
-        refListener.get().onUpdate();
+        if (refListener == null) return;
+        for (String key : refListener.keySet())
+            if (refListener.get(key) != null)
+                refListener.get(key).onUpdate();
 
     }
 }

@@ -6,6 +6,7 @@ import org.byters.api.disccache.IPreferenceStorage;
 import org.byters.api.memorycache.ICacheList;
 import org.byters.api.repository.IRepositoryList;
 import org.byters.api.view.INavigator;
+import org.byters.api.view.presenter.IPresenterItemImage;
 import org.byters.api.view.presenter.IPresenterList;
 import org.byters.api.view.presenter.IPresenterListAdapter;
 import org.byters.api.view.ui.IHelperPopup;
@@ -15,6 +16,7 @@ import org.byters.gallery.repository.RepositoryList;
 import org.byters.gallery.view.Navigator;
 import org.byters.gallery.view.presenter.PresenterAdapterList;
 import org.byters.gallery.view.presenter.PresenterFragmentList;
+import org.byters.gallery.view.presenter.PresenterItemImage;
 import org.byters.gallery.view.ui.util.HelperPopup;
 
 class Initializator {
@@ -27,6 +29,7 @@ class Initializator {
     private IRepositoryList repositoryList;
     private IHelperPopup helperPopup;
     private IPreferenceStorage preferenceStorage;
+    private IPresenterItemImage presenterItemImage;
 
     Initializator(Application application) {
         this.application = application;
@@ -69,5 +72,10 @@ class Initializator {
     public IPreferenceStorage getPreferenceStorage() {
         if (preferenceStorage == null) preferenceStorage = new PreferenceStorage();
         return preferenceStorage;
+    }
+
+    public IPresenterItemImage getPresenterItemImage() {
+        if (presenterItemImage==null)presenterItemImage = new PresenterItemImage();
+        return presenterItemImage;
     }
 }

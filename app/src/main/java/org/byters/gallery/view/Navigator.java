@@ -49,7 +49,9 @@ public class Navigator implements INavigator {
 
         FragmentItemImage fragment = new FragmentItemImage();
         fragment.setArgs(url);
-        refManager.get().beginTransaction()
+        refManager.get()
+                .beginTransaction()
+                .addToBackStack(null)
                 .replace(layoutId, fragment)
                 .commit();
     }

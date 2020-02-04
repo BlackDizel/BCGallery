@@ -9,6 +9,7 @@ import org.byters.gallery.view.presenter.PresenterAdapterList;
 import org.byters.gallery.view.presenter.PresenterFragmentList;
 import org.byters.gallery.view.ui.activity.MainActivity;
 import org.byters.gallery.view.ui.adapter.AdapterList;
+import org.byters.gallery.view.ui.fragment.FragmentItemImage;
 import org.byters.gallery.view.ui.fragment.FragmentList;
 
 class Injector implements org.byters.api.IInjector {
@@ -63,6 +64,11 @@ class Injector implements org.byters.api.IInjector {
     @Override
     public void inject(CacheList cacheList) {
         cacheList.preferenceStorage = links.getPreferenceStorage();
+    }
+
+    @Override
+    public void inject(FragmentItemImage fragmentItemImage) {
+        fragmentItemImage.presenter = links.getPresenterItemImage();
     }
 
 }

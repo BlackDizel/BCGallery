@@ -7,6 +7,7 @@ import org.byters.gallery.view.presenter.PresenterAdapterList;
 import org.byters.gallery.view.presenter.PresenterFragmentList;
 import org.byters.gallery.view.ui.activity.MainActivity;
 import org.byters.gallery.view.ui.adapter.AdapterList;
+import org.byters.gallery.view.ui.fragment.FragmentItemImage;
 import org.byters.gallery.view.ui.fragment.FragmentList;
 
 public interface IInjector {
@@ -25,4 +26,6 @@ public interface IInjector {
     void inject(Navigator navigator);
 
     void inject(CacheList cacheList);
+
+    void inject(FragmentItemImage fragmentItemImage);
 }

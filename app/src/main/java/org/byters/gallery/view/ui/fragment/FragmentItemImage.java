@@ -23,9 +23,9 @@ public class FragmentItemImage extends Fragment implements View.OnClickListener 
     private View tvRotate, tvCrop, tvDelete, tvShare;
     private IPresenterItemImageListener listenerPresenter;
 
-    public void setArgs(String url) {
+    public void setArgs(Uri url) {
         Bundle bundle = new Bundle();
-        bundle.putString(EXTRA_IMAGE_URL, url);
+        bundle.putString(EXTRA_IMAGE_URL, url.toString());
         this.setArguments(bundle);
     }
 

@@ -44,7 +44,7 @@ public class PresenterAdapterList implements org.byters.api.view.presenter.IPres
 
     @Override
     public void onClickImage(int position) {
-        navigator.navigateImage(getItemUrl(position).toString());
+        navigator.navigateImage(getItemUrl(position), true);
     }
 
     @Override

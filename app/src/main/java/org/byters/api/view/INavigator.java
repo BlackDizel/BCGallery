@@ -2,15 +2,14 @@ package org.byters.api.view;
 
 import android.app.FragmentManager;
 import android.content.Context;
-
-import org.byters.gallery.view.ui.activity.MainActivity;
+import android.net.Uri;
 
 public interface INavigator {
     void set(Context context, FragmentManager manager, int layoutId);
 
     void navigateList();
 
-    void navigateImage(String url);
+    void navigateImage(Uri uri, boolean addToBackStack);
 
     void navigateError();
 }

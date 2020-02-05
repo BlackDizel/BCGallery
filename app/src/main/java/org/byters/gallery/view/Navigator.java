@@ -1,7 +1,9 @@
 package org.byters.gallery.view;
 
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
+import android.net.Uri;
 
 import org.byters.api.disccache.IPreferenceStorage;
 import org.byters.api.view.INavigator;
@@ -17,14 +19,12 @@ public class Navigator implements INavigator {
 
     public IHelperPopup helperPopup;
     public IPreferenceStorage preferenceStorage;
-
-    public Navigator() {
-        GalleryApplication.getInjector().inject(this);
-    }
-
     private WeakReference<Context> refContext;
     private WeakReference<FragmentManager> refManager;
     private int layoutId;
+    public Navigator() {
+        GalleryApplication.getInjector().inject(this);
+    }
 
     @Override
     public void set(Context context, FragmentManager manager, int layoutId) {
@@ -44,15 +44,18 @@ public class Navigator implements INavigator {
     }
 
     @Override
-    public void navigateImage(String url) {
+    public void navigateImage(Uri uri, boolean addToBackStack) {
         if (refManager == null || refManager.get() == null) return;
 
         FragmentItemImage fragment = new FragmentItemImage();
-        fragment.setArgs(url);
-        refManager.get()
-                .beginTransaction()
-                .addToBackStack(null)
-                .replace(layoutId, fragment)
+        fragment.setArgs(uri);
+        FragmentTransaction transaction = refManager.get()
+                .beginTransaction();
+
+        if (addToBackStack)
+            transaction = transaction.addToBackStack(null);
+
+        transaction.replace(layoutId, fragment)
                 .commit();
     }
 

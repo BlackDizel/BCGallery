@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
 
     private void openContent() {
         if (getIntent() != null && getIntent().getData() != null)
-            navigator.navigateImage(getIntent().getData().toString());
+            navigator.navigateImage(getIntent().getData(), false);
         else
             navigator.navigateList();
     }

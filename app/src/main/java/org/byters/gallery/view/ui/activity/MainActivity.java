@@ -29,11 +29,10 @@ public class MainActivity extends Activity {
     }
 
     private void checkNavigate() {
-        //todo if action filter open file, navigate to image, else navigate to list
-        requestNavigateList();
+        requestPermissions();
     }
 
-    private void requestNavigateList() {
+    private void requestPermissions() {
         if (getPackageManager().checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, BuildConfig.APPLICATION_ID)
                 != PackageManager.PERMISSION_GRANTED
                 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -41,11 +40,14 @@ public class MainActivity extends Activity {
             this.requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     REQUEST_CODE_READ_STORAGE);
 
-        } else openList();
+        } else openContent();
     }
 
-    private void openList() {
-        navigator.navigateList();
+    private void openContent() {
+        if (getIntent() != null && getIntent().getData() != null)
+            navigator.navigateImage(getIntent().getData().toString());
+        else
+            navigator.navigateList();
     }
 
     @Override
@@ -53,7 +55,7 @@ public class MainActivity extends Activity {
         if (requestCode == REQUEST_CODE_READ_STORAGE
                 && grantResults.length > 0
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-            navigator.navigateList();
+            openContent();
         else navigator.navigateError();
     }
 }

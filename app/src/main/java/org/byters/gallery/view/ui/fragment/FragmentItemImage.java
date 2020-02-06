@@ -12,12 +12,13 @@ import org.byters.api.view.presenter.IPresenterItemImage;
 import org.byters.api.view.presenter.listener.IPresenterItemImageListener;
 import org.byters.gallery.GalleryApplication;
 import org.byters.gallery.R;
+import org.byters.gallery.view.ui.view.imageViewZoom.CropIwaImageView;
 
 public class FragmentItemImage extends Fragment implements View.OnClickListener {
 
     private static final String EXTRA_IMAGE_URL = "IMAGE_URL";
     public IPresenterItemImage presenter;
-    private ImageView ivItem;
+    private CropIwaImageView ivItem;
     private View ivSettings;
     private View llSettings;
     private View tvRotate, tvCrop, tvDelete, tvShare;
@@ -44,8 +45,14 @@ public class FragmentItemImage extends Fragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_image, container, false);
         initViews(view);
-        presenter.onCreateView(getImagePath());
+
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        presenter.onCreateView(getImagePath());
     }
 
     private void initViews(View view) {

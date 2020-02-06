@@ -5,12 +5,10 @@
 
     android:layout_height="match_parent">
 
-    <ImageView
+    <org.byters.gallery.view.ui.view.imageViewZoom.CropIwaImageView
         android:id="@+id/ivItem"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerInside"
-        tools:background="#afa" />
+        android:layout_height="match_parent" />
 
     <ImageView
         android:id="@+id/ivSettings"

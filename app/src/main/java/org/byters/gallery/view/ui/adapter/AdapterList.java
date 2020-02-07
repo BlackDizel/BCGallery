@@ -1,5 +1,6 @@
 package org.byters.gallery.view.ui.adapter;
 
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,11 @@ import android.widget.TextView;
 import org.byters.api.view.presenter.IPresenterListAdapter;
 import org.byters.api.view.presenter.listener.IPresenterListAdapterListener;
 import org.byters.api.view.ui.adapter.viewholder.IViewHolder;
+import org.byters.api.view.ui.utils.IImageLoader;
+import org.byters.api.view.ui.utils.listener.IImageLoaderListener;
 import org.byters.gallery.GalleryApplication;
 import org.byters.gallery.R;
+import org.byters.gallery.view.ui.util.ImageLoader;
 
 public class AdapterList extends BaseAdapter {
 
@@ -88,30 +92,41 @@ public class AdapterList extends BaseAdapter {
 
     private class ViewHolderItemImage implements IViewHolder, View.OnClickListener {
 
+        private final IImageLoaderListener listenerLoader;
         private ImageView ivItem;
         private int position;
+        private IImageLoader loader;
 
         ViewHolderItemImage(View view) {
             ivItem = view.findViewById(R.id.ivItem);
             view.setOnClickListener(this);
+            loader = new ImageLoader();
+            loader.setListener(listenerLoader = new LoaderListener());
         }
 
         @Override
         public void setData(int position) {
             this.position = position;
-            ivItem.setImageURI(presenter.getItemUrl(position));
+            ivItem.setImageDrawable(null);
+            loader.load(presenter.getItem(position));
         }
 
         @Override
         public void onClick(View v) {
             presenter.onClickImage(position);
         }
+
+        private class LoaderListener implements IImageLoaderListener {
+            @Override
+            public void onLoad(Bitmap bitmap) {
+                ivItem.setImageBitmap(bitmap);
+            }
+        }
     }
 
     private class ListenerPresenter implements IPresenterListAdapterListener {
         @Override
         public void onUpdate() {
-            android.util.Log.v("some", "update");
             notifyDataSetChanged();
         }
     }

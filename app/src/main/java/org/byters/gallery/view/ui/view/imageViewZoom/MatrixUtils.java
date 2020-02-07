@@ -41,6 +41,8 @@ class MatrixUtils {
 
 
         //todo add cropiwa pull request
+
+        //todo only if image smaller than screen
         if (initialPosition == InitialPosition.CENTER_INSIDE) {
 
             float scale = Math.min(allowedBounds.width() / current.width(),
@@ -58,6 +60,7 @@ class MatrixUtils {
 
         }
 
+        //todo if image smaller than screen or image out of screen edges
         float dX = allowedBounds.width() / 2 - (current.left + current.width() / 2);
         float dY = allowedBounds.height() / 2 - (current.top + current.height() / 2);
 

@@ -4,7 +4,6 @@ import android.net.Uri;
 
 import org.byters.api.memorycache.ICacheList;
 import org.byters.api.memorycache.listener.ICacheListListener;
-import org.byters.api.repository.IRepositoryList;
 import org.byters.api.view.INavigator;
 import org.byters.api.view.presenter.listener.IPresenterListAdapterListener;
 import org.byters.gallery.GalleryApplication;
@@ -62,6 +61,11 @@ public class PresenterAdapterList implements org.byters.api.view.presenter.IPres
     public String getItemTitle(int position) {
         File file = cacheList.getItem(position);
         return file == null ? "unknown" : file.getName();
+    }
+
+    @Override
+    public File getItem(int position) {
+        return cacheList.getItem(position);
     }
 
     @Override

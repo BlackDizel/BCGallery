@@ -4,6 +4,8 @@ import android.net.Uri;
 
 import org.byters.api.view.presenter.listener.IPresenterListAdapterListener;
 
+import java.io.File;
+
 public interface IPresenterListAdapter {
     void setListener(IPresenterListAdapterListener listener);
 
@@ -20,4 +22,6 @@ public interface IPresenterListAdapter {
     String getItemTitle(int position);
 
     void onClickFolder(int position);
+
+    File getItem(int position);
 }

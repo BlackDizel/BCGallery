@@ -12,4 +12,8 @@ public interface INavigator {
     void navigateImage(Uri uri, boolean addToBackStack);
 
     void navigateError();
+
+    void navigateFolder(String folderId);
+
+    void navigateFolderList();
 }

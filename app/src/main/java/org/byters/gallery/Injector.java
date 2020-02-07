@@ -3,11 +3,16 @@ package org.byters.gallery;
 import android.app.Application;
 
 import org.byters.gallery.memorycache.CacheList;
+import org.byters.gallery.repository.RepositoryImages;
 import org.byters.gallery.repository.RepositoryList;
 import org.byters.gallery.view.Navigator;
+import org.byters.gallery.view.presenter.PresenterAdapterFolderImages;
 import org.byters.gallery.view.presenter.PresenterAdapterList;
+import org.byters.gallery.view.presenter.PresenterFoldersAdapter;
 import org.byters.gallery.view.presenter.PresenterFragmentList;
 import org.byters.gallery.view.ui.activity.MainActivity;
+import org.byters.gallery.view.ui.adapter.AdapterFolderImages;
+import org.byters.gallery.view.ui.adapter.AdapterFolders;
 import org.byters.gallery.view.ui.adapter.AdapterList;
 import org.byters.gallery.view.ui.fragment.FragmentItemImage;
 import org.byters.gallery.view.ui.fragment.FragmentList;
@@ -51,7 +56,7 @@ class Injector implements org.byters.api.IInjector {
 
     @Override
     public void inject(RepositoryList repositoryList) {
-        repositoryList.cacheList = links.getCacheList();
+        repositoryList.cacheList = links.getCacheFolders();
         repositoryList.application = links.getApplication();
     }
 
@@ -69,6 +74,36 @@ class Injector implements org.byters.api.IInjector {
     @Override
     public void inject(FragmentItemImage fragmentItemImage) {
         fragmentItemImage.presenter = links.getPresenterItemImage();
+    }
+
+    @Override
+    public void inject(AdapterFolders adapterFolders) {
+        adapterFolders.presenter = links.getPresenterAdapterFolders();
+    }
+
+    @Override
+    public void inject(PresenterFoldersAdapter presenterFoldersAdapter) {
+        presenterFoldersAdapter.cacheFolders = links.getCacheFolders();
+        presenterFoldersAdapter.navigator = links.getNavigator();
+        presenterFoldersAdapter.repositoryList = links.getRepositoryList();
+    }
+
+    @Override
+    public void inject(RepositoryImages repositoryImages) {
+        repositoryImages.application = links.getApplication();
+        repositoryImages.cacheImages = links.getCacheImages();
+    }
+
+    @Override
+    public void inject(AdapterFolderImages adapterFolderImages) {
+        adapterFolderImages.presenter = links.getPresenterADapterFolderImages();
+    }
+
+    @Override
+    public void inject(PresenterAdapterFolderImages presenterAdapterFolderImages) {
+        presenterAdapterFolderImages.cacheImages = links.getCacheImages();
+        presenterAdapterFolderImages.navigator = links.getNavigator();
+        presenterAdapterFolderImages.repositoryImages = links.getRepositoryImages();
     }
 
 }

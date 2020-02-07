@@ -10,6 +10,8 @@ import org.byters.api.view.INavigator;
 import org.byters.api.view.ui.IHelperPopup;
 import org.byters.gallery.GalleryApplication;
 import org.byters.gallery.view.ui.fragment.FragmentError;
+import org.byters.gallery.view.ui.fragment.FragmentFolderImages;
+import org.byters.gallery.view.ui.fragment.FragmentFolders;
 import org.byters.gallery.view.ui.fragment.FragmentItemImage;
 import org.byters.gallery.view.ui.fragment.FragmentList;
 
@@ -22,6 +24,7 @@ public class Navigator implements INavigator {
     private WeakReference<Context> refContext;
     private WeakReference<FragmentManager> refManager;
     private int layoutId;
+
     public Navigator() {
         GalleryApplication.getInjector().inject(this);
     }
@@ -64,6 +67,23 @@ public class Navigator implements INavigator {
         if (refManager == null || refManager.get() == null) return;
         refManager.get().beginTransaction()
                 .replace(layoutId, new FragmentError())
+                .commit();
+    }
+
+    @Override
+    public void navigateFolder(String folderId) {
+        if (refManager == null || refManager.get() == null) return;
+        refManager.get().beginTransaction()
+                .replace(layoutId, FragmentFolderImages.getInstance(folderId))
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void navigateFolderList() {
+        if (refManager == null || refManager.get() == null) return;
+        refManager.get().beginTransaction()
+                .replace(layoutId, new FragmentFolders())
                 .commit();
     }
 }

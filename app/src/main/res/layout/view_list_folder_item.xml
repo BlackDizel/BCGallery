@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.byters.gallery.view.ui.view.FrameLayoutSquare xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="2dp">
+
+    <ImageView
+        android:id="@+id/ivItem"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@android:color/transparent"
+        android:ellipsize="end"
+        android:lines="1"
+        android:padding="16dp"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        tools:text="title" />
+
+</org.byters.gallery.view.ui.view.FrameLayoutSquare>

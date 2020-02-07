@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
         if (getIntent() != null && getIntent().getData() != null)
             navigator.navigateImage(getIntent().getData(), false);
         else
-            navigator.navigateList();
+            navigator.navigateFolderList();
     }
 
     @Override

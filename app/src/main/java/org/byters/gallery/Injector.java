@@ -3,6 +3,7 @@ package org.byters.gallery;
 import android.app.Application;
 
 import org.byters.gallery.memorycache.CacheList;
+import org.byters.gallery.repository.RepositoryImageDelete;
 import org.byters.gallery.repository.RepositoryImages;
 import org.byters.gallery.repository.RepositoryList;
 import org.byters.gallery.view.Navigator;
@@ -10,6 +11,7 @@ import org.byters.gallery.view.presenter.PresenterAdapterFolderImages;
 import org.byters.gallery.view.presenter.PresenterAdapterList;
 import org.byters.gallery.view.presenter.PresenterFoldersAdapter;
 import org.byters.gallery.view.presenter.PresenterFragmentList;
+import org.byters.gallery.view.presenter.PresenterItemImage;
 import org.byters.gallery.view.ui.activity.MainActivity;
 import org.byters.gallery.view.ui.adapter.AdapterFolderImages;
 import org.byters.gallery.view.ui.adapter.AdapterFolders;
@@ -104,6 +106,17 @@ class Injector implements org.byters.api.IInjector {
         presenterAdapterFolderImages.cacheImages = links.getCacheImages();
         presenterAdapterFolderImages.navigator = links.getNavigator();
         presenterAdapterFolderImages.repositoryImages = links.getRepositoryImages();
+    }
+
+    @Override
+    public void inject(PresenterItemImage presenterItemImage) {
+        presenterItemImage.repositoryImageDelete = links.getRepositoryImageDelete();
+    }
+
+    @Override
+    public void inject(RepositoryImageDelete repositoryImageDelete) {
+        repositoryImageDelete.cacheImages = links.getCacheImages();
+        repositoryImageDelete.application = links.getApplication();
     }
 
 }

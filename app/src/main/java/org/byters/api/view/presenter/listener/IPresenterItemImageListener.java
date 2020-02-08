@@ -7,4 +7,6 @@ public interface IPresenterItemImageListener {
     void setImage(Uri url);
 
     void setSettingsVisible(boolean isVisible);
+
+    void onImageDelete();
 }

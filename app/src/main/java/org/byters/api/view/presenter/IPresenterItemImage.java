@@ -17,5 +17,5 @@ public interface IPresenterItemImage {
 
     void onClickCrop();
 
-    void onCreateView(String path);
+    void onCreateView(String imagePath);
 }

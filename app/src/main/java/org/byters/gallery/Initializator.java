@@ -6,6 +6,7 @@ import org.byters.api.disccache.IPreferenceStorage;
 import org.byters.api.memorycache.ICacheFolders;
 import org.byters.api.memorycache.ICacheImages;
 import org.byters.api.memorycache.ICacheList;
+import org.byters.api.repository.IRepositoryImageDelete;
 import org.byters.api.repository.IRepositoryImages;
 import org.byters.api.repository.IRepositoryList;
 import org.byters.api.view.INavigator;
@@ -19,6 +20,7 @@ import org.byters.gallery.disccache.PreferenceStorage;
 import org.byters.gallery.memorycache.CacheFolders;
 import org.byters.gallery.memorycache.CacheImages;
 import org.byters.gallery.memorycache.CacheList;
+import org.byters.gallery.repository.RepositoryImageDelete;
 import org.byters.gallery.repository.RepositoryImages;
 import org.byters.gallery.repository.RepositoryList;
 import org.byters.gallery.view.Navigator;
@@ -45,6 +47,7 @@ class Initializator {
     private ICacheImages cacheImages;
     private IPresenterAdapterFolderImages presenterAdapterFolderImages;
     private IRepositoryImages repositoryImages;
+    private IRepositoryImageDelete repositoryImageDelete;
 
     Initializator(Application application) {
         this.application = application;
@@ -119,5 +122,10 @@ class Initializator {
     public IRepositoryImages getRepositoryImages() {
         if (repositoryImages == null) repositoryImages = new RepositoryImages();
         return repositoryImages;
+    }
+
+    public IRepositoryImageDelete getRepositoryImageDelete() {
+        if (repositoryImageDelete == null) repositoryImageDelete = new RepositoryImageDelete();
+        return repositoryImageDelete;
     }
 }

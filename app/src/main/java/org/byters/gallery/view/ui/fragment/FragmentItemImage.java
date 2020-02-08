@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import org.byters.api.view.presenter.IPresenterItemImage;
 import org.byters.api.view.presenter.listener.IPresenterItemImageListener;
@@ -91,12 +90,20 @@ public class FragmentItemImage extends Fragment implements View.OnClickListener 
 
         @Override
         public void setImage(Uri url) {
+            if (!isAdded()) return;
             ivItem.setImageURI(url);
         }
 
         @Override
         public void setSettingsVisible(boolean isVisible) {
+            if (!isAdded()) return;
             llSettings.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        }
+
+        @Override
+        public void onImageDelete() {
+            if (!isAdded()) return;
+            getActivity().onBackPressed();
         }
     }
 }

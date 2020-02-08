@@ -13,9 +13,8 @@ import org.byters.gallery.R;
 
 public class MainActivity extends Activity {
 
-    private static final int REQUEST_CODE_READ_STORAGE = 23;
+    private static final int REQUEST_CODE_STORAGE = 23;
     public INavigator navigator;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +32,18 @@ public class MainActivity extends Activity {
     }
 
     private void requestPermissions() {
-        if (getPackageManager().checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, BuildConfig.APPLICATION_ID)
-                != PackageManager.PERMISSION_GRANTED
-                && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
-            this.requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                    REQUEST_CODE_READ_STORAGE);
+        if (!allPermissionsGranted() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            this.requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_CODE_STORAGE);
 
         } else openContent();
+    }
+
+    private boolean allPermissionsGranted() {
+        return getPackageManager().checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, BuildConfig.APPLICATION_ID)
+                == PackageManager.PERMISSION_GRANTED
+                && getPackageManager().checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, BuildConfig.APPLICATION_ID)
+                == PackageManager.PERMISSION_GRANTED;
     }
 
     private void openContent() {
@@ -52,9 +55,10 @@ public class MainActivity extends Activity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == REQUEST_CODE_READ_STORAGE
-                && grantResults.length > 0
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+        if (requestCode == REQUEST_CODE_STORAGE
+                && grantResults.length == 2
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                && grantResults[1] == PackageManager.PERMISSION_GRANTED)
             openContent();
         else navigator.navigateError();
     }

@@ -8,6 +8,7 @@ import org.byters.model.ImageMeta;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class CacheImages implements ICacheImages {
 
@@ -43,5 +44,19 @@ public class CacheImages implements ICacheImages {
     @Override
     public void setListener(ICacheImagesListener listener) {
         this.refListener = new WeakReference<>(listener);
+    }
+
+    @Override
+    public void removeImageByPath(String url) {
+        if (data == null) return;
+        Iterator<ImageMeta> iterator = data.iterator();
+        while (iterator.hasNext()) {
+            ImageMeta item = iterator.next();
+            if (item.getPath().equals(url)) {
+                iterator.remove();
+                notifyListeners();
+                return;
+            }
+        }
     }
 }

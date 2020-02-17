@@ -38,7 +38,7 @@ public class CacheImages implements ICacheImages {
 
     @Override
     public Uri getItemPath(int position) {
-        return Uri.parse(data.get(position).getPath());
+        return position < 0 || position >= data.size() ? null : Uri.parse(data.get(position).getPath());
     }
 
     @Override
@@ -58,5 +58,14 @@ public class CacheImages implements ICacheImages {
                 return;
             }
         }
+    }
+
+    @Override
+    public int getImagePosition(Uri imagePath) {
+        if (data == null) return -1;
+        for (int i = 0; i < data.size(); ++i)
+            if (data.get(i).getPath().equals(imagePath.toString()))
+                return i;
+        return -1;
     }
 }

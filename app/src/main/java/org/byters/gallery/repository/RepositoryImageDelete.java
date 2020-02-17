@@ -24,7 +24,6 @@ public class RepositoryImageDelete implements IRepositoryImageDelete {
     @Override
     public void request(String url) {
 
-        String[] params = {MediaStore.Images.Media.DATA, url};
         int rowsDeleted = application.getContentResolver()
                 .delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                         String.format("\"%s\"=\"%s\"", MediaStore.Images.Media.DATA, url), null);

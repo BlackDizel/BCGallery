@@ -19,4 +19,26 @@
         android:padding="12dp"
         android:src="@drawable/ic_more_vert_white_24dp" />
 
+
+    <ImageView
+        android:id="@+id/ivNext"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_dark_circle"
+        android:padding="12dp"
+        android:src="@drawable/ic_chevron_right_white_24dp" />
+
+    <ImageView
+        android:id="@+id/ivPrev"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_dark_circle"
+        android:padding="12dp"
+        android:src="@drawable/ic_chevron_left_white_24dp" />
+
+
 </FrameLayout>

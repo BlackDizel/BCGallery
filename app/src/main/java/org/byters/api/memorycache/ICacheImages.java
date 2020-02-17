@@ -19,4 +19,6 @@ public interface ICacheImages {
     void setListener(ICacheImagesListener iCacheImagesListener);
 
     void removeImageByPath(String url);
+
+    int getImagePosition(Uri imagePath);
 }

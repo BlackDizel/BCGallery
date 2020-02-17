@@ -9,4 +9,6 @@ public interface IPresenterItemImageListener {
     void setSettingsVisible(boolean isVisible);
 
     void onImageDelete();
+
+    void setNavigationButtonsVisible(boolean isViewFirst, boolean isViewLast);
 }

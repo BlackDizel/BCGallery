@@ -18,4 +18,8 @@ public interface IPresenterItemImage {
     void onCreateView(String imagePath);
 
     void onClickEdit();
+
+    void onClickPrev();
+
+    void onClickNext();
 }

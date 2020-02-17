@@ -113,6 +113,8 @@ class Injector implements org.byters.api.IInjector {
     public void inject(PresenterItemImage presenterItemImage) {
         presenterItemImage.repositoryImageDelete = links.getRepositoryImageDelete();
         presenterItemImage.deviceUtils = links.getDeviceUtils();
+        presenterItemImage.cacheImages = links.getCacheImages();
+        presenterItemImage.navigator = links.getNavigator();
     }
 
     @Override

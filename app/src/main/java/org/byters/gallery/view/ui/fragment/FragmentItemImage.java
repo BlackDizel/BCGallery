@@ -20,7 +20,7 @@ public class FragmentItemImage extends Fragment implements View.OnClickListener 
     private static final String EXTRA_IMAGE_URL = "IMAGE_URL";
     public IPresenterItemImage presenter;
     private CropIwaImageView ivItem;
-    private View ivSettings;
+    private View ivSettings, ivPrev, ivNext;
     private IPresenterItemImageListener listenerPresenter;
     private DialogImageSettings dialogImageSettings;
     private IDialogImageSettingsListener listenerDialogSettings;
@@ -60,13 +60,21 @@ public class FragmentItemImage extends Fragment implements View.OnClickListener 
     private void initViews(View view) {
         ivItem = view.findViewById(R.id.ivItem);
         ivSettings = view.findViewById(R.id.ivSettings);
+        ivPrev = view.findViewById(R.id.ivPrev);
+        ivNext = view.findViewById(R.id.ivNext);
         ivSettings.setOnClickListener(this);
+        ivNext.setOnClickListener(this);
+        ivPrev.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.ivSettings)
             presenter.onClickSettings();
+        if (v.getId() == R.id.ivPrev)
+            presenter.onClickPrev();
+        if (v.getId() == R.id.ivNext)
+            presenter.onClickNext();
     }
 
     private class PresenterListener implements IPresenterItemImageListener {
@@ -95,6 +103,13 @@ public class FragmentItemImage extends Fragment implements View.OnClickListener 
         public void onImageDelete() {
             if (!isAdded()) return;
             getActivity().onBackPressed();
+        }
+
+        @Override
+        public void setNavigationButtonsVisible(boolean isViewPrev, boolean isViewNext) {
+            if (!isAdded()) return;
+            ivPrev.setVisibility(isViewPrev ? View.VISIBLE : View.GONE);
+            ivNext.setVisibility(isViewNext ? View.VISIBLE : View.GONE);
         }
     }
 

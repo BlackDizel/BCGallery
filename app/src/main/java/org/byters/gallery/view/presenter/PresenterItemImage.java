@@ -58,6 +58,11 @@ public class PresenterItemImage implements org.byters.api.view.presenter.IPresen
         notifyListenerImage();
     }
 
+    @Override
+    public void onClickEdit() {
+        //todo
+    }
+
     private void notifyListenerImage() {
         if (refListener == null || refListener.get() == null) return;
         refListener.get().setImage(imagePath);

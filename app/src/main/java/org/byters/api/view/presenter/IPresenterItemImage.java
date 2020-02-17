@@ -1,7 +1,5 @@
 package org.byters.api.view.presenter;
 
-import android.os.Bundle;
-
 import org.byters.api.view.presenter.listener.IPresenterItemImageListener;
 
 public interface IPresenterItemImage {
@@ -18,4 +16,6 @@ public interface IPresenterItemImage {
     void onClickCrop();
 
     void onCreateView(String imagePath);
+
+    void onClickEdit();
 }

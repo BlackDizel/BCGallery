@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 
 import org.byters.api.view.presenter.IPresenterItemImage;
 import org.byters.api.view.presenter.listener.IPresenterItemImageListener;
+import org.byters.api.view.ui.dialog.listener.IDialogImageSettingsListener;
 import org.byters.gallery.GalleryApplication;
 import org.byters.gallery.R;
+import org.byters.gallery.view.ui.dialog.DialogImageSettings;
 import org.byters.gallery.view.ui.view.imageViewZoom.CropIwaImageView;
 
 public class FragmentItemImage extends Fragment implements View.OnClickListener {
@@ -19,9 +21,9 @@ public class FragmentItemImage extends Fragment implements View.OnClickListener 
     public IPresenterItemImage presenter;
     private CropIwaImageView ivItem;
     private View ivSettings;
-    private View llSettings;
-    private View tvRotate, tvCrop, tvDelete, tvShare;
     private IPresenterItemImageListener listenerPresenter;
+    private DialogImageSettings dialogImageSettings;
+    private IDialogImageSettingsListener listenerDialogSettings;
 
     public void setArgs(Uri url) {
         Bundle bundle = new Bundle();
@@ -38,6 +40,7 @@ public class FragmentItemImage extends Fragment implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         GalleryApplication.getInjector().inject(this);
         presenter.setListener(listenerPresenter = new PresenterListener());
+        listenerDialogSettings = new ListenerDialogSettings();
     }
 
     @Override
@@ -57,33 +60,13 @@ public class FragmentItemImage extends Fragment implements View.OnClickListener 
     private void initViews(View view) {
         ivItem = view.findViewById(R.id.ivItem);
         ivSettings = view.findViewById(R.id.ivSettings);
-        llSettings = view.findViewById(R.id.llSettings);
-        tvShare = view.findViewById(R.id.tvShare);
-        tvDelete = view.findViewById(R.id.tvDelete);
-        tvRotate = view.findViewById(R.id.tvRotate);
-        tvCrop = view.findViewById(R.id.tvCrop);
-
         ivSettings.setOnClickListener(this);
-        tvShare.setOnClickListener(this);
-        tvDelete.setOnClickListener(this);
-        tvRotate.setOnClickListener(this);
-        tvCrop.setOnClickListener(this);
-
-        //todo impement settings view close
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.ivSettings)
             presenter.onClickSettings();
-        if (v.getId() == R.id.tvShare)
-            presenter.onClickShare();
-        if (v.getId() == R.id.tvDelete)
-            presenter.onClickDelete();
-        if (v.getId() == R.id.tvRotate)
-            presenter.onClickRotate();
-        if (v.getId() == R.id.tvCrop)
-            presenter.onClickCrop();
     }
 
     private class PresenterListener implements IPresenterItemImageListener {
@@ -97,7 +80,15 @@ public class FragmentItemImage extends Fragment implements View.OnClickListener 
         @Override
         public void setSettingsVisible(boolean isVisible) {
             if (!isAdded()) return;
-            llSettings.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+
+            if (!isVisible) return;
+
+            if (dialogImageSettings != null)
+                dialogImageSettings.cancel();
+
+            dialogImageSettings = new DialogImageSettings(getActivity(), listenerDialogSettings);
+            dialogImageSettings.show();
+
         }
 
         @Override
@@ -106,4 +97,33 @@ public class FragmentItemImage extends Fragment implements View.OnClickListener 
             getActivity().onBackPressed();
         }
     }
+
+    private class ListenerDialogSettings implements IDialogImageSettingsListener {
+
+        @Override
+        public void onClickShare() {
+            presenter.onClickShare();
+        }
+
+        @Override
+        public void onClickDelete() {
+            presenter.onClickDelete();
+        }
+
+        @Override
+        public void onClickRotate() {
+            presenter.onClickRotate();
+        }
+
+        @Override
+        public void onClickCrop() {
+            presenter.onClickCrop();
+        }
+
+        @Override
+        public void onClickEdit() {
+            presenter.onClickEdit();
+        }
+    }
+
 }

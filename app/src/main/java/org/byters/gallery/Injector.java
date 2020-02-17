@@ -66,6 +66,7 @@ class Injector implements org.byters.api.IInjector {
     public void inject(Navigator navigator) {
         navigator.helperPopup = links.getHelperPopup();
         navigator.preferenceStorage = links.getPreferenceStorage();
+        navigator.deviceUtils = links.getDeviceUtils();
     }
 
     @Override
@@ -111,6 +112,7 @@ class Injector implements org.byters.api.IInjector {
     @Override
     public void inject(PresenterItemImage presenterItemImage) {
         presenterItemImage.repositoryImageDelete = links.getRepositoryImageDelete();
+        presenterItemImage.deviceUtils = links.getDeviceUtils();
     }
 
     @Override

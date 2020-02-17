@@ -5,6 +5,7 @@ import android.net.Uri;
 import org.byters.api.repository.IRepositoryImageDelete;
 import org.byters.api.repository.listener.IRepositoryImageDeleteListener;
 import org.byters.api.view.presenter.listener.IPresenterItemImageListener;
+import org.byters.api.view.utils.IDeviceUtils;
 import org.byters.gallery.GalleryApplication;
 
 import java.lang.ref.WeakReference;
@@ -12,7 +13,10 @@ import java.lang.ref.WeakReference;
 public class PresenterItemImage implements org.byters.api.view.presenter.IPresenterItemImage {
 
     private final IRepositoryImageDeleteListener listenerRepository;
+
     public IRepositoryImageDelete repositoryImageDelete;
+    public IDeviceUtils deviceUtils;
+
     private WeakReference<IPresenterItemImageListener> refListener;
     private Uri imagePath;
 
@@ -34,7 +38,7 @@ public class PresenterItemImage implements org.byters.api.view.presenter.IPresen
 
     @Override
     public void onClickShare() {
-
+        deviceUtils.shareImage(imagePath);
     }
 
     @Override
@@ -53,14 +57,14 @@ public class PresenterItemImage implements org.byters.api.view.presenter.IPresen
     }
 
     @Override
-    public void onCreateView(String imagePath) {
-        this.imagePath = Uri.parse(imagePath);
-        notifyListenerImage();
+    public void onClickEdit() {
+        deviceUtils.editImage(imagePath);
     }
 
     @Override
-    public void onClickEdit() {
-        //todo
+    public void onCreateView(String imagePath) {
+        this.imagePath = Uri.parse(imagePath);
+        notifyListenerImage();
     }
 
     private void notifyListenerImage() {

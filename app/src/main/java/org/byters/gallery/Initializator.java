@@ -16,6 +16,7 @@ import org.byters.api.view.presenter.IPresenterItemImage;
 import org.byters.api.view.presenter.IPresenterList;
 import org.byters.api.view.presenter.IPresenterListAdapter;
 import org.byters.api.view.ui.IHelperPopup;
+import org.byters.api.view.utils.IDeviceUtils;
 import org.byters.gallery.disccache.PreferenceStorage;
 import org.byters.gallery.memorycache.CacheFolders;
 import org.byters.gallery.memorycache.CacheImages;
@@ -30,6 +31,7 @@ import org.byters.gallery.view.presenter.PresenterFoldersAdapter;
 import org.byters.gallery.view.presenter.PresenterFragmentList;
 import org.byters.gallery.view.presenter.PresenterItemImage;
 import org.byters.gallery.view.ui.util.HelperPopup;
+import org.byters.gallery.view.util.DeviceUtils;
 
 class Initializator {
 
@@ -48,6 +50,7 @@ class Initializator {
     private IPresenterAdapterFolderImages presenterAdapterFolderImages;
     private IRepositoryImages repositoryImages;
     private IRepositoryImageDelete repositoryImageDelete;
+    private IDeviceUtils deviceUtils;
 
     Initializator(Application application) {
         this.application = application;
@@ -127,5 +130,10 @@ class Initializator {
     public IRepositoryImageDelete getRepositoryImageDelete() {
         if (repositoryImageDelete == null) repositoryImageDelete = new RepositoryImageDelete();
         return repositoryImageDelete;
+    }
+
+    public IDeviceUtils getDeviceUtils() {
+        if (deviceUtils == null) deviceUtils = new DeviceUtils();
+        return deviceUtils;
     }
 }

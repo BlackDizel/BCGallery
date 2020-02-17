@@ -8,6 +8,7 @@ import android.net.Uri;
 import org.byters.api.disccache.IPreferenceStorage;
 import org.byters.api.view.INavigator;
 import org.byters.api.view.ui.IHelperPopup;
+import org.byters.api.view.utils.IDeviceUtils;
 import org.byters.gallery.GalleryApplication;
 import org.byters.gallery.view.ui.fragment.FragmentError;
 import org.byters.gallery.view.ui.fragment.FragmentFolderImages;
@@ -21,6 +22,8 @@ public class Navigator implements INavigator {
 
     public IHelperPopup helperPopup;
     public IPreferenceStorage preferenceStorage;
+    public IDeviceUtils deviceUtils;
+
     private WeakReference<Context> refContext;
     private WeakReference<FragmentManager> refManager;
     private int layoutId;
@@ -36,6 +39,7 @@ public class Navigator implements INavigator {
         this.layoutId = layoutId;
         helperPopup.set(context);
         preferenceStorage.set(context);
+        deviceUtils.set(context);
     }
 
     @Override

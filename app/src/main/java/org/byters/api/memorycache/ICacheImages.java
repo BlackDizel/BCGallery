@@ -4,6 +4,7 @@ import android.net.Uri;
 
 import org.byters.api.memorycache.listener.ICacheImagesListener;
 import org.byters.model.ImageMeta;
+import org.byters.model.ItemType;
 
 import java.util.ArrayList;
 
@@ -21,4 +22,8 @@ public interface ICacheImages {
     void removeImageByPath(String url);
 
     int getImagePosition(Uri imagePath);
+
+    ItemType getItemType(int position);
+
+    int getItemIdByPath(Uri imagePath);
 }

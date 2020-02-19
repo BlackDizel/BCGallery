@@ -14,6 +14,7 @@ import org.byters.gallery.R;
 public class MainActivity extends Activity {
 
     private static final int REQUEST_CODE_STORAGE = 23;
+    private static final CharSequence TYPE_IMAGE = "image";
     public INavigator navigator;
 
     @Override
@@ -47,9 +48,11 @@ public class MainActivity extends Activity {
     }
 
     private void openContent() {
-        if (getIntent() != null && getIntent().getData() != null)
-            navigator.navigateImage(getIntent().getData(), false);
-        else
+        if (getIntent() != null && getIntent().getData() != null) {
+            if (getIntent().getType() != null
+                    && getIntent().getType().contains(TYPE_IMAGE))
+                navigator.navigateImage(getIntent().getData(), false);
+        } else
             navigator.navigateFolderList();
     }
 

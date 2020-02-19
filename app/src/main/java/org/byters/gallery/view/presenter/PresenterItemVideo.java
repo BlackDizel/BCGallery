@@ -3,35 +3,34 @@ package org.byters.gallery.view.presenter;
 import android.net.Uri;
 
 import org.byters.api.memorycache.ICacheImages;
-import org.byters.api.repository.IRepositoryImageDelete;
-import org.byters.api.repository.listener.IRepositoryImageDeleteListener;
+import org.byters.api.repository.IRepositoryVideoDelete;
+import org.byters.api.repository.listener.IRepositoryVideoDeleteListener;
 import org.byters.api.view.INavigator;
-import org.byters.api.view.presenter.listener.IPresenterItemImageListener;
+import org.byters.api.view.presenter.listener.IPresenterItemVideoListener;
 import org.byters.api.view.utils.IDeviceUtils;
 import org.byters.gallery.GalleryApplication;
 import org.byters.model.ItemType;
 
 import java.lang.ref.WeakReference;
 
-public class PresenterItemImage implements org.byters.api.view.presenter.IPresenterItemImage {
+public class PresenterItemVideo implements org.byters.api.view.presenter.IPresenterItemVideo {
+    private final IRepositoryVideoDeleteListener listenerRepository;
 
-    private final IRepositoryImageDeleteListener listenerRepository;
-
-    public IRepositoryImageDelete repositoryImageDelete;
+    public IRepositoryVideoDelete repositoryDelete;
     public ICacheImages cacheImages;
     public INavigator navigator;
     public IDeviceUtils deviceUtils;
 
-    private WeakReference<IPresenterItemImageListener> refListener;
+    private WeakReference<IPresenterItemVideoListener> refListener;
     private Uri imagePath;
 
-    public PresenterItemImage() {
+    public PresenterItemVideo() {
         GalleryApplication.getInjector().inject(this);
-        repositoryImageDelete.setListener(listenerRepository = new ListenerRepository());
+        repositoryDelete.setListener(listenerRepository = new ListenerRepository());
     }
 
     @Override
-    public void setListener(IPresenterItemImageListener listener) {
+    public void setListener(IPresenterItemVideoListener listener) {
         this.refListener = new WeakReference<>(listener);
     }
 
@@ -48,7 +47,7 @@ public class PresenterItemImage implements org.byters.api.view.presenter.IPresen
 
     @Override
     public void onClickDelete() {
-        repositoryImageDelete.request(imagePath.toString());
+        repositoryDelete.request(imagePath.toString());
     }
 
     @Override
@@ -94,7 +93,12 @@ public class PresenterItemImage implements org.byters.api.view.presenter.IPresen
     }
 
     @Override
-    public void onCreateView(String imagePath) {
+    public void onClickItem() {
+        deviceUtils.navigateVideo(imagePath);
+    }
+
+    @Override
+    public void onViewCreated(String imagePath) {
         this.imagePath = Uri.parse(imagePath);
         notifyListenerButtonsView(!isImageFirst(this.imagePath), !isImageLast(this.imagePath));
         notifyListenerImage();
@@ -115,23 +119,18 @@ public class PresenterItemImage implements org.byters.api.view.presenter.IPresen
 
     private void notifyListenerImage() {
         if (refListener == null || refListener.get() == null) return;
-        refListener.get().setImage(imagePath);
+        refListener.get().setImage(cacheImages.getItemIdByPath(imagePath));
     }
 
-    private void notifyListenerImageDeleted() {
+    private void notifyListenerItemDeleted() {
         if (refListener == null || refListener.get() == null) return;
         refListener.get().onImageDelete();
     }
 
-    private class ListenerRepository implements IRepositoryImageDeleteListener {
+    private class ListenerRepository implements IRepositoryVideoDeleteListener {
         @Override
-        public void onImageDelete() {
-            notifyListenerImageDeleted();
-        }
-
-        @Override
-        public void onImageDeleteError() {
-
+        public void onVideoDelete() {
+            notifyListenerItemDeleted();
         }
     }
 }

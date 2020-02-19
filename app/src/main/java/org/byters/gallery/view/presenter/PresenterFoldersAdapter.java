@@ -6,6 +6,7 @@ import org.byters.api.repository.IRepositoryList;
 import org.byters.api.view.INavigator;
 import org.byters.api.view.presenter.listener.IPresenterListAdapterListener;
 import org.byters.gallery.GalleryApplication;
+import org.byters.model.ItemType;
 
 import java.lang.ref.WeakReference;
 
@@ -51,6 +52,11 @@ public class PresenterFoldersAdapter implements org.byters.api.view.presenter.IP
     @Override
     public int getItemThumbnailId(int position) {
         return cacheFolders.getItemThumbnailId(position);
+    }
+
+    @Override
+    public ItemType getItemType(int position) {
+        return cacheFolders.getItemType(position);
     }
 
     private class ListenerCache implements ICacheFoldersListener {

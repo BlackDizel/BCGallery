@@ -36,4 +36,15 @@ public class DeviceUtils implements org.byters.api.view.utils.IDeviceUtils {
         intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         refContext.get().startActivity(Intent.createChooser(intent, null));
     }
+
+    @Override
+    public void navigateVideo(Uri itemPath) {
+
+        if (refContext == null || refContext.get() == null) return;
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.putExtra(Intent.EXTRA_STREAM, itemPath);
+        intent.setType("video/*");
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        refContext.get().startActivity(Intent.createChooser(intent, null));
+    }
 }

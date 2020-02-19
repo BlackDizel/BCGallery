@@ -7,6 +7,7 @@ import org.byters.api.view.INavigator;
 import org.byters.api.view.presenter.IPresenterAdapterFolderImages;
 import org.byters.api.view.presenter.listener.IPresenterAdapterFolderImagesListener;
 import org.byters.gallery.GalleryApplication;
+import org.byters.model.ItemType;
 
 import java.lang.ref.WeakReference;
 
@@ -25,7 +26,11 @@ public class PresenterAdapterFolderImages implements IPresenterAdapterFolderImag
 
     @Override
     public void onClickImage(int position) {
-        navigator.navigateImage(cacheImages.getItemPath(position), true);
+        ItemType type = cacheImages.getItemType(position);
+        if (type == ItemType.TYPE_IMAGE)
+            navigator.navigateImage(cacheImages.getItemPath(position), true);
+        else if (type == ItemType.TYPE_VIDEO)
+            navigator.navigateVideo(cacheImages.getItemPath(position), true);
     }
 
     @Override
@@ -46,6 +51,11 @@ public class PresenterAdapterFolderImages implements IPresenterAdapterFolderImag
     @Override
     public void onCreate(String folderId) {
         repositoryImages.request(folderId);
+    }
+
+    @Override
+    public ItemType getItemType(int position) {
+        return cacheImages.getItemType(position);
     }
 
     private class ListenerCache implements ICacheImagesListener {

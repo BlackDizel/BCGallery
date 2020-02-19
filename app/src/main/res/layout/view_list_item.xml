@@ -10,4 +10,14 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
+    <ImageView
+        android:id="@+id/ivPlay"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_dark_circle"
+        android:padding="12dp"
+        android:src="@drawable/ic_play_white_24dp"
+        android:visibility="gone" />
+
 </org.byters.gallery.view.ui.view.FrameLayoutSquare>

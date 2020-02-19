@@ -108,7 +108,7 @@ public class AdapterFolders extends BaseAdapter {
             tvTitle.setText(presenter.getItemTitle(position));
 
             ivItem.setImageDrawable(null);
-            loader.load(ivItem.getContext().getContentResolver(), presenter.getItemThumbnailId(position));
+            loader.load(ivItem.getContext().getContentResolver(), presenter.getItemThumbnailId(position), presenter.getItemType(position));
         }
 
         private class LoaderListener implements IImageLoaderListener {

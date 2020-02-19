@@ -15,6 +15,7 @@ import org.byters.api.view.ui.utils.listener.IImageLoaderListener;
 import org.byters.gallery.GalleryApplication;
 import org.byters.gallery.R;
 import org.byters.gallery.view.ui.util.ThumbnailLoader;
+import org.byters.model.ItemType;
 
 public class AdapterFolderImages extends BaseAdapter {
 
@@ -76,11 +77,13 @@ public class AdapterFolderImages extends BaseAdapter {
 
         private final IImageLoaderListener listenerLoader;
         private ImageView ivItem;
+        private View ivPlay;
         private int position;
         private IThumbnailLoader loader;
 
         ViewHolderItemImage(View view) {
             ivItem = view.findViewById(R.id.ivItem);
+            ivPlay = view.findViewById(R.id.ivPlay);
             view.setOnClickListener(this);
             loader = new ThumbnailLoader();
             loader.setListener(listenerLoader = new LoaderListener());
@@ -89,10 +92,10 @@ public class AdapterFolderImages extends BaseAdapter {
         @Override
         public void setData(int position) {
             this.position = position;
+            ivPlay.setVisibility(presenter.getItemType(position) == ItemType.TYPE_VIDEO ? View.VISIBLE : View.GONE);
 
             ivItem.setImageDrawable(null);
-            loader.load(ivItem.getContext().getContentResolver(), presenter.getItemId(position));
-
+            loader.load(ivItem.getContext().getContentResolver(), presenter.getItemId(position), presenter.getItemType(position));
         }
 
         @Override

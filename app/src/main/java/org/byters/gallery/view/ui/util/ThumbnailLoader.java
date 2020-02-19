@@ -7,6 +7,7 @@ import android.provider.MediaStore;
 
 import org.byters.api.view.ui.utils.IThumbnailLoader;
 import org.byters.api.view.ui.utils.listener.IImageLoaderListener;
+import org.byters.model.ItemType;
 
 import java.lang.ref.WeakReference;
 
@@ -17,11 +18,11 @@ public class ThumbnailLoader implements IThumbnailLoader {
     private WeakReference<IImageLoaderListener> refListener;
 
     @Override
-    public void load(ContentResolver contentResolver, int itemId) {
+    public void load(ContentResolver contentResolver, int itemId, ItemType itemType) {
 
         if (loader != null) loader.cancel(true);
 
-        loader = new Loader(contentResolver, refListener);
+        loader = new Loader(itemType, contentResolver, refListener);
         loader.execute(itemId);
 
     }
@@ -35,10 +36,12 @@ public class ThumbnailLoader implements IThumbnailLoader {
 
         private final WeakReference<ContentResolver> refContentResolver;
         private final WeakReference<IImageLoaderListener> refListener;
+        private final ItemType type;
 
-        Loader(ContentResolver contentResolver, WeakReference<IImageLoaderListener> refListener) {
+        Loader(ItemType type, ContentResolver contentResolver, WeakReference<IImageLoaderListener> refListener) {
             this.refContentResolver = new WeakReference<>(contentResolver);
             this.refListener = refListener;
+            this.type = type;
         }
 
         @Override
@@ -47,10 +50,16 @@ public class ThumbnailLoader implements IThumbnailLoader {
 
             int itemId = params[0];
 
-            return MediaStore.Images.Thumbnails.getThumbnail(
-                    refContentResolver.get(), itemId,
-                    MediaStore.Images.Thumbnails.MINI_KIND,
-                    null);
+            if (type == ItemType.TYPE_IMAGE)
+                return MediaStore.Images.Thumbnails.getThumbnail(
+                        refContentResolver.get(), itemId,
+                        MediaStore.Images.Thumbnails.MINI_KIND,
+                        null);
+            else
+                return MediaStore.Video.Thumbnails.getThumbnail(
+                        refContentResolver.get(), itemId,
+                        MediaStore.Video.Thumbnails.MINI_KIND,
+                        null);
         }
 
         @Override

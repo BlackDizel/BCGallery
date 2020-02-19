@@ -9,10 +9,12 @@ import org.byters.api.memorycache.ICacheList;
 import org.byters.api.repository.IRepositoryImageDelete;
 import org.byters.api.repository.IRepositoryImages;
 import org.byters.api.repository.IRepositoryList;
+import org.byters.api.repository.IRepositoryVideoDelete;
 import org.byters.api.view.INavigator;
 import org.byters.api.view.presenter.IPresenterAdapterFolderImages;
 import org.byters.api.view.presenter.IPresenterFoldersAdapter;
 import org.byters.api.view.presenter.IPresenterItemImage;
+import org.byters.api.view.presenter.IPresenterItemVideo;
 import org.byters.api.view.presenter.IPresenterList;
 import org.byters.api.view.presenter.IPresenterListAdapter;
 import org.byters.api.view.ui.IHelperPopup;
@@ -24,12 +26,14 @@ import org.byters.gallery.memorycache.CacheList;
 import org.byters.gallery.repository.RepositoryImageDelete;
 import org.byters.gallery.repository.RepositoryImages;
 import org.byters.gallery.repository.RepositoryList;
+import org.byters.gallery.repository.RepositoryVideoDelete;
 import org.byters.gallery.view.Navigator;
 import org.byters.gallery.view.presenter.PresenterAdapterFolderImages;
 import org.byters.gallery.view.presenter.PresenterAdapterList;
 import org.byters.gallery.view.presenter.PresenterFoldersAdapter;
 import org.byters.gallery.view.presenter.PresenterFragmentList;
 import org.byters.gallery.view.presenter.PresenterItemImage;
+import org.byters.gallery.view.presenter.PresenterItemVideo;
 import org.byters.gallery.view.ui.util.HelperPopup;
 import org.byters.gallery.view.util.DeviceUtils;
 
@@ -51,6 +55,8 @@ class Initializator {
     private IRepositoryImages repositoryImages;
     private IRepositoryImageDelete repositoryImageDelete;
     private IDeviceUtils deviceUtils;
+    private IPresenterItemVideo presenterItemVideo;
+    private IRepositoryVideoDelete repositoryVideoDelete;
 
     Initializator(Application application) {
         this.application = application;
@@ -135,5 +141,15 @@ class Initializator {
     public IDeviceUtils getDeviceUtils() {
         if (deviceUtils == null) deviceUtils = new DeviceUtils();
         return deviceUtils;
+    }
+
+    public IPresenterItemVideo getPresenterItemVideo() {
+        if (presenterItemVideo == null) presenterItemVideo = new PresenterItemVideo();
+        return presenterItemVideo;
+    }
+
+    public IRepositoryVideoDelete getRepositoryVideoDelete() {
+        if (repositoryVideoDelete == null) repositoryVideoDelete = new RepositoryVideoDelete();
+        return repositoryVideoDelete;
     }
 }

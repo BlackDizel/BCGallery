@@ -5,6 +5,7 @@ import android.net.Uri;
 import org.byters.api.memorycache.ICacheImages;
 import org.byters.api.memorycache.listener.ICacheImagesListener;
 import org.byters.model.ImageMeta;
+import org.byters.model.ItemType;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -67,5 +68,19 @@ public class CacheImages implements ICacheImages {
             if (data.get(i).getPath().equals(imagePath.toString()))
                 return i;
         return -1;
+    }
+
+    @Override
+    public ItemType getItemType(int position) {
+        return position < 0 || position >= data.size() ? null : data.get(position).getType();
+    }
+
+    @Override
+    public int getItemIdByPath(Uri imagePath) {
+        if (data == null) return 0;
+        for (ImageMeta item : data)
+            if (item.getPath().equals(imagePath.toString()))
+                return item.getId();
+        return 0;
     }
 }

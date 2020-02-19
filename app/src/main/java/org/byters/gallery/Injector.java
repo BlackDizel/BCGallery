@@ -6,17 +6,20 @@ import org.byters.gallery.memorycache.CacheList;
 import org.byters.gallery.repository.RepositoryImageDelete;
 import org.byters.gallery.repository.RepositoryImages;
 import org.byters.gallery.repository.RepositoryList;
+import org.byters.gallery.repository.RepositoryVideoDelete;
 import org.byters.gallery.view.Navigator;
 import org.byters.gallery.view.presenter.PresenterAdapterFolderImages;
 import org.byters.gallery.view.presenter.PresenterAdapterList;
 import org.byters.gallery.view.presenter.PresenterFoldersAdapter;
 import org.byters.gallery.view.presenter.PresenterFragmentList;
 import org.byters.gallery.view.presenter.PresenterItemImage;
+import org.byters.gallery.view.presenter.PresenterItemVideo;
 import org.byters.gallery.view.ui.activity.MainActivity;
 import org.byters.gallery.view.ui.adapter.AdapterFolderImages;
 import org.byters.gallery.view.ui.adapter.AdapterFolders;
 import org.byters.gallery.view.ui.adapter.AdapterList;
 import org.byters.gallery.view.ui.fragment.FragmentItemImage;
+import org.byters.gallery.view.ui.fragment.FragmentItemVideo;
 import org.byters.gallery.view.ui.fragment.FragmentList;
 
 class Injector implements org.byters.api.IInjector {
@@ -121,6 +124,25 @@ class Injector implements org.byters.api.IInjector {
     public void inject(RepositoryImageDelete repositoryImageDelete) {
         repositoryImageDelete.cacheImages = links.getCacheImages();
         repositoryImageDelete.application = links.getApplication();
+    }
+
+    @Override
+    public void inject(FragmentItemVideo fragmentItemVideo) {
+        fragmentItemVideo.presenter = links.getPresenterItemVideo();
+    }
+
+    @Override
+    public void inject(PresenterItemVideo presenterItemVideo) {
+        presenterItemVideo.deviceUtils = links.getDeviceUtils();
+        presenterItemVideo.navigator = links.getNavigator();
+        presenterItemVideo.cacheImages = links.getCacheImages();
+        presenterItemVideo.repositoryDelete = links.getRepositoryVideoDelete();
+    }
+
+    @Override
+    public void inject(RepositoryVideoDelete repositoryVideoDelete) {
+        repositoryVideoDelete.cacheImages = links.getCacheImages();
+        repositoryVideoDelete.application = links.getApplication();
     }
 
 }

@@ -3,6 +3,7 @@ package org.byters.gallery.memorycache;
 import org.byters.api.memorycache.ICacheFolders;
 import org.byters.api.memorycache.listener.ICacheFoldersListener;
 import org.byters.model.ImageFolderMeta;
+import org.byters.model.ItemType;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -42,6 +43,11 @@ public class CacheFolders implements ICacheFolders {
     @Override
     public int getItemThumbnailId(int position) {
         return data.get(position).getThumbnailId();
+    }
+
+    @Override
+    public ItemType getItemType(int position) {
+        return data.get(position).getType();
     }
 
     private void notifyListeners() {

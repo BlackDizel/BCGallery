@@ -9,4 +9,6 @@ public interface IDeviceUtils {
     void set(Context context);
 
     void editImage(Uri imagePath);
+
+    void navigateVideo(Uri itemPath);
 }

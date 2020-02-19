@@ -14,7 +14,7 @@ import org.byters.gallery.view.ui.fragment.FragmentError;
 import org.byters.gallery.view.ui.fragment.FragmentFolderImages;
 import org.byters.gallery.view.ui.fragment.FragmentFolders;
 import org.byters.gallery.view.ui.fragment.FragmentItemImage;
-import org.byters.gallery.view.ui.fragment.FragmentList;
+import org.byters.gallery.view.ui.fragment.FragmentItemVideo;
 
 import java.lang.ref.WeakReference;
 
@@ -41,14 +41,14 @@ public class Navigator implements INavigator {
         preferenceStorage.set(context);
         deviceUtils.set(context);
     }
-
+/*
     @Override
     public void navigateList() {
         if (refManager == null || refManager.get() == null) return;
         refManager.get().beginTransaction()
                 .replace(layoutId, new FragmentList())
                 .commit();
-    }
+    }*/
 
     @Override
     public void navigateImage(Uri uri, boolean addToBackStack) {
@@ -88,6 +88,22 @@ public class Navigator implements INavigator {
         if (refManager == null || refManager.get() == null) return;
         refManager.get().beginTransaction()
                 .replace(layoutId, new FragmentFolders())
+                .commit();
+    }
+
+    @Override
+    public void navigateVideo(Uri uri, boolean addToBackstack) {
+        if (refManager == null || refManager.get() == null) return;
+
+        FragmentItemVideo fragment = new FragmentItemVideo();
+        fragment.setArgs(uri);
+        FragmentTransaction transaction = refManager.get()
+                .beginTransaction();
+
+        if (addToBackstack)
+            transaction = transaction.addToBackStack(null);
+
+        transaction.replace(layoutId, fragment)
                 .commit();
     }
 }

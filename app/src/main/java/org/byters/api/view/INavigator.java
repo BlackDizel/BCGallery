@@ -7,8 +7,6 @@ import android.net.Uri;
 public interface INavigator {
     void set(Context context, FragmentManager manager, int layoutId);
 
-    void navigateList();
-
     void navigateImage(Uri uri, boolean addToBackStack);
 
     void navigateError();
@@ -16,4 +14,6 @@ public interface INavigator {
     void navigateFolder(String folderId);
 
     void navigateFolderList();
+
+    void navigateVideo(Uri uri, boolean addToBackstack);
 }

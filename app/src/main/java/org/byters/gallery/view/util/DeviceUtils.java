@@ -21,6 +21,18 @@ public class DeviceUtils implements org.byters.api.view.utils.IDeviceUtils {
         refContext.get().startActivity(Intent.createChooser(intent, null));
     }
 
+
+    @Override
+    public void shareVideo(Uri imagePath) {
+        if (refContext == null || refContext.get() == null) return;
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_STREAM, imagePath);
+        intent.setType("video/*");
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        refContext.get().startActivity(Intent.createChooser(intent, null));
+    }
+
     @Override
     public void set(Context context) {
         this.refContext = new WeakReference<>(context);

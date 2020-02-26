@@ -11,4 +11,6 @@ public interface IDeviceUtils {
     void editImage(Uri imagePath);
 
     void navigateVideo(Uri itemPath);
+
+    void shareVideo(Uri imagePath);
 }

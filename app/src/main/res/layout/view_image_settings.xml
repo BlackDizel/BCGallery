@@ -12,7 +12,8 @@
         android:id="@+id/tvRotate"
         style="@style/menu_image_item"
         android:drawableStart="@drawable/ic_rotate_right_white_24dp"
-        android:text="@string/action_rotate" />
+        android:text="@string/action_rotate"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tvShare"
@@ -24,7 +25,8 @@
         android:id="@+id/tvCrop"
         style="@style/menu_image_item"
         android:drawableStart="@drawable/ic_crop_white_24dp"
-        android:text="@string/action_crop" />
+        android:text="@string/action_crop"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tvEdit"

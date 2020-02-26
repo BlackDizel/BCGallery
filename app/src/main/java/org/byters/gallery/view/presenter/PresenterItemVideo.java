@@ -42,7 +42,7 @@ public class PresenterItemVideo implements org.byters.api.view.presenter.IPresen
 
     @Override
     public void onClickShare() {
-        deviceUtils.shareImage(imagePath);
+        deviceUtils.shareVideo(imagePath);
     }
 
     @Override

@@ -41,14 +41,6 @@ public class Navigator implements INavigator {
         preferenceStorage.set(context);
         deviceUtils.set(context);
     }
-/*
-    @Override
-    public void navigateList() {
-        if (refManager == null || refManager.get() == null) return;
-        refManager.get().beginTransaction()
-                .replace(layoutId, new FragmentList())
-                .commit();
-    }*/
 
     @Override
     public void navigateImage(Uri uri, boolean addToBackStack) {

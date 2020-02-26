@@ -2,25 +2,20 @@ package org.byters.gallery;
 
 import android.app.Application;
 
-import org.byters.gallery.memorycache.CacheList;
 import org.byters.gallery.repository.RepositoryImageDelete;
 import org.byters.gallery.repository.RepositoryImages;
 import org.byters.gallery.repository.RepositoryList;
 import org.byters.gallery.repository.RepositoryVideoDelete;
 import org.byters.gallery.view.Navigator;
 import org.byters.gallery.view.presenter.PresenterAdapterFolderImages;
-import org.byters.gallery.view.presenter.PresenterAdapterList;
 import org.byters.gallery.view.presenter.PresenterFoldersAdapter;
-import org.byters.gallery.view.presenter.PresenterFragmentList;
 import org.byters.gallery.view.presenter.PresenterItemImage;
 import org.byters.gallery.view.presenter.PresenterItemVideo;
 import org.byters.gallery.view.ui.activity.MainActivity;
 import org.byters.gallery.view.ui.adapter.AdapterFolderImages;
 import org.byters.gallery.view.ui.adapter.AdapterFolders;
-import org.byters.gallery.view.ui.adapter.AdapterList;
 import org.byters.gallery.view.ui.fragment.FragmentItemImage;
 import org.byters.gallery.view.ui.fragment.FragmentItemVideo;
-import org.byters.gallery.view.ui.fragment.FragmentList;
 
 class Injector implements org.byters.api.IInjector {
 
@@ -36,30 +31,6 @@ class Injector implements org.byters.api.IInjector {
     }
 
     @Override
-    public void inject(AdapterList adapterList) {
-        adapterList.presenter = links.getPresenterAdapterList();
-    }
-
-    @Override
-    public void inject(FragmentList fragmentList) {
-        fragmentList.presenter = links.getPresenterFragmentList();
-    }
-
-    @Override
-    public void inject(PresenterAdapterList presenterAdapterList) {
-        presenterAdapterList.cacheList = links.getCacheList();
-        presenterAdapterList.navigator = links.getNavigator();
-    }
-
-    @Override
-    public void inject(PresenterFragmentList presenterFragmentList) {
-        presenterFragmentList.cacheList = links.getCacheList();
-        presenterFragmentList.application = links.getApplication();
-        presenterFragmentList.helperPopup = links.getHelperPopup();
-        presenterFragmentList.preferenceStorage = links.getPreferenceStorage();
-    }
-
-    @Override
     public void inject(RepositoryList repositoryList) {
         repositoryList.cacheList = links.getCacheFolders();
         repositoryList.application = links.getApplication();
@@ -70,11 +41,6 @@ class Injector implements org.byters.api.IInjector {
         navigator.helperPopup = links.getHelperPopup();
         navigator.preferenceStorage = links.getPreferenceStorage();
         navigator.deviceUtils = links.getDeviceUtils();
-    }
-
-    @Override
-    public void inject(CacheList cacheList) {
-        cacheList.preferenceStorage = links.getPreferenceStorage();
     }
 
     @Override

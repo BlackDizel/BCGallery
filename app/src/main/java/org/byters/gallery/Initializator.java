@@ -5,7 +5,6 @@ import android.app.Application;
 import org.byters.api.disccache.IPreferenceStorage;
 import org.byters.api.memorycache.ICacheFolders;
 import org.byters.api.memorycache.ICacheImages;
-import org.byters.api.memorycache.ICacheList;
 import org.byters.api.repository.IRepositoryImageDelete;
 import org.byters.api.repository.IRepositoryImages;
 import org.byters.api.repository.IRepositoryList;
@@ -15,23 +14,18 @@ import org.byters.api.view.presenter.IPresenterAdapterFolderImages;
 import org.byters.api.view.presenter.IPresenterFoldersAdapter;
 import org.byters.api.view.presenter.IPresenterItemImage;
 import org.byters.api.view.presenter.IPresenterItemVideo;
-import org.byters.api.view.presenter.IPresenterList;
-import org.byters.api.view.presenter.IPresenterListAdapter;
 import org.byters.api.view.ui.IHelperPopup;
 import org.byters.api.view.utils.IDeviceUtils;
 import org.byters.gallery.disccache.PreferenceStorage;
 import org.byters.gallery.memorycache.CacheFolders;
 import org.byters.gallery.memorycache.CacheImages;
-import org.byters.gallery.memorycache.CacheList;
 import org.byters.gallery.repository.RepositoryImageDelete;
 import org.byters.gallery.repository.RepositoryImages;
 import org.byters.gallery.repository.RepositoryList;
 import org.byters.gallery.repository.RepositoryVideoDelete;
 import org.byters.gallery.view.Navigator;
 import org.byters.gallery.view.presenter.PresenterAdapterFolderImages;
-import org.byters.gallery.view.presenter.PresenterAdapterList;
 import org.byters.gallery.view.presenter.PresenterFoldersAdapter;
-import org.byters.gallery.view.presenter.PresenterFragmentList;
 import org.byters.gallery.view.presenter.PresenterItemImage;
 import org.byters.gallery.view.presenter.PresenterItemVideo;
 import org.byters.gallery.view.ui.util.HelperPopup;
@@ -41,9 +35,6 @@ class Initializator {
 
     private Application application;
     private INavigator navigator;
-    private IPresenterListAdapter presenterAdapterList;
-    private IPresenterList presenterFragmentList;
-    private ICacheList cacheList;
     private IRepositoryList repositoryList;
     private IHelperPopup helperPopup;
     private IPreferenceStorage preferenceStorage;
@@ -65,21 +56,6 @@ class Initializator {
     INavigator getNavigator() {
         if (navigator == null) navigator = new Navigator();
         return navigator;
-    }
-
-    public IPresenterListAdapter getPresenterAdapterList() {
-        if (presenterAdapterList == null) presenterAdapterList = new PresenterAdapterList();
-        return presenterAdapterList;
-    }
-
-    public IPresenterList getPresenterFragmentList() {
-        if (presenterFragmentList == null) presenterFragmentList = new PresenterFragmentList();
-        return presenterFragmentList;
-    }
-
-    public ICacheList getCacheList() {
-        if (cacheList == null) cacheList = new CacheList();
-        return cacheList;
     }
 
     public IRepositoryList getRepositoryList() {

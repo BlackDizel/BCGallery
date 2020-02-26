@@ -12,6 +12,7 @@ import org.byters.gallery.view.presenter.PresenterItemVideo;
 import org.byters.gallery.view.ui.activity.MainActivity;
 import org.byters.gallery.view.ui.adapter.AdapterFolderImages;
 import org.byters.gallery.view.ui.adapter.AdapterFolders;
+import org.byters.gallery.view.ui.fragment.FragmentFolders;
 import org.byters.gallery.view.ui.fragment.FragmentItemImage;
 import org.byters.gallery.view.ui.fragment.FragmentItemVideo;
 
@@ -43,4 +44,6 @@ public interface IInjector {
     void inject(PresenterItemVideo presenterItemVideo);
 
     void inject(RepositoryVideoDelete repositoryVideoDelete);
+
+    void inject(FragmentFolders fragmentFolders);
 }

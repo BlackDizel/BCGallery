@@ -13,4 +13,6 @@ public interface IDeviceUtils {
     void navigateVideo(Uri itemPath);
 
     void shareVideo(Uri imagePath);
+
+    void openLink(String url);
 }

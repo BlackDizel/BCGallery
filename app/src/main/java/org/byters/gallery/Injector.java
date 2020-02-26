@@ -14,6 +14,7 @@ import org.byters.gallery.view.presenter.PresenterItemVideo;
 import org.byters.gallery.view.ui.activity.MainActivity;
 import org.byters.gallery.view.ui.adapter.AdapterFolderImages;
 import org.byters.gallery.view.ui.adapter.AdapterFolders;
+import org.byters.gallery.view.ui.fragment.FragmentFolders;
 import org.byters.gallery.view.ui.fragment.FragmentItemImage;
 import org.byters.gallery.view.ui.fragment.FragmentItemVideo;
 
@@ -109,6 +110,11 @@ class Injector implements org.byters.api.IInjector {
     public void inject(RepositoryVideoDelete repositoryVideoDelete) {
         repositoryVideoDelete.cacheImages = links.getCacheImages();
         repositoryVideoDelete.application = links.getApplication();
+    }
+
+    @Override
+    public void inject(FragmentFolders fragmentFolders) {
+        fragmentFolders.deviceUtils = links.getDeviceUtils();
     }
 
 }

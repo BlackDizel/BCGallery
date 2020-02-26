@@ -7,6 +7,17 @@
         android:id="@+id/lvItems"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="2" />
+        android:numColumns="2"
+        android:paddingBottom="64dp" />
+
+    <ImageView
+        android:id="@+id/ivFeedback"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom|center"
+        android:layout_margin="8dp"
+        android:background="@drawable/bg_dark_circle"
+        android:padding="12dp"
+        android:src="@drawable/ic_mail_outline_white_24dp" />
 
 </FrameLayout>

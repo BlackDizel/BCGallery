@@ -59,4 +59,15 @@ public class DeviceUtils implements org.byters.api.view.utils.IDeviceUtils {
         intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         refContext.get().startActivity(Intent.createChooser(intent, null));
     }
+
+    @Override
+    public void openLink(String url) {
+        if (refContext == null || refContext.get() == null) return;
+        Context context = refContext.get();
+        Uri uri = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+
+        if (intent.resolveActivity(context.getPackageManager()) != null)
+            context.startActivity(intent);
+    }
 }

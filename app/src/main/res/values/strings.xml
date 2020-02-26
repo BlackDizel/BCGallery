@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BCGallery</string>
+    <string name="app_name">BC Gallery</string>
     <string name="no_content">No files here</string>
     <string name="empty" />
     <string name="parent_files_empty">No content in parent directory</string>

@@ -20,6 +20,9 @@ import java.lang.ref.WeakReference;
 
 public class Navigator implements INavigator {
 
+    private static final String TAG_ITEM = "ITEM";
+    private static final String TAG_FOLDER = "FOLDER";
+
     public IHelperPopup helperPopup;
     public IPreferenceStorage preferenceStorage;
     public IDeviceUtils deviceUtils;
@@ -52,7 +55,7 @@ public class Navigator implements INavigator {
                 .beginTransaction();
 
         if (addToBackStack)
-            transaction = transaction.addToBackStack(null);
+            transaction = transaction.addToBackStack(TAG_ITEM);
 
         transaction.replace(layoutId, fragment)
                 .commit();
@@ -71,7 +74,7 @@ public class Navigator implements INavigator {
         if (refManager == null || refManager.get() == null) return;
         refManager.get().beginTransaction()
                 .replace(layoutId, FragmentFolderImages.getInstance(folderId))
-                .addToBackStack(null)
+                .addToBackStack(TAG_FOLDER)
                 .commit();
     }
 
@@ -93,7 +96,7 @@ public class Navigator implements INavigator {
                 .beginTransaction();
 
         if (addToBackstack)
-            transaction = transaction.addToBackStack(null);
+            transaction = transaction.addToBackStack(TAG_ITEM);
 
         transaction.replace(layoutId, fragment)
                 .commit();
